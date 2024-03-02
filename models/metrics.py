@@ -158,7 +158,14 @@ class SphereProduct(nn.Module):
         NormOfFeature = torch.norm(input, 2, 1)
 
         # --------------------------- convert label to one-hot ---------------------------
-        one_hot = torch.zeros(cos_theta.size())
+
+        if torch.cuda.is_available():
+            one_hot = torch.zeros(cos_theta.size(), device='cuda')
+        elif torch.backends.mps.is_available():
+            one_hot = torch.zeros(cos_theta.size(), device='mps')
+        else:
+            one_hot = torch.zeros(cos_theta.size())
+
         one_hot = one_hot.cuda() if cos_theta.is_cuda else one_hot
         one_hot.scatter_(1, label.view(-1, 1), 1)
 

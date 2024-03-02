@@ -108,7 +108,7 @@ if __name__ == '__main__':
                 label = label.data.cpu().numpy()
                 # print(output)
                 # print(label)
-                acc = np.mean((output == label).astype(int))
+                acc = np.mean(output == label)
                 speed = opt.print_freq / (time.time() - start)
                 time_str = time.asctime(time.localtime(time.time()))
                 print('{} train epoch {} iter {} {} iters/s loss {} acc {}'.format(time_str, i, ii, speed, loss.item(), acc))

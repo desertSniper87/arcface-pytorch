@@ -28,14 +28,14 @@ class Dataset(data.Dataset):
 
         if self.phase == 'train':
             self.transforms = T.Compose([
-                T.RandomCrop(self.input_shape[1:]),
+                # T.RandomCrop(self.input_shape[1:]),
                 T.RandomHorizontalFlip(),
                 T.ToTensor(),
                 normalize
             ])
         else:
             self.transforms = T.Compose([
-                T.CenterCrop(self.input_shape[1:]),
+                # T.CenterCrop(self.input_shape[1:]),
                 T.ToTensor(),
                 normalize
             ])
@@ -45,7 +45,7 @@ class Dataset(data.Dataset):
         splits = sample.split()
         img_path = splits[0]
         data = Image.open(img_path)
-        data = data.convert('L')
+        data = data.convert('RGB')
         data = self.transforms(data)
         label = np.int32(splits[1])
         return data.float(), label

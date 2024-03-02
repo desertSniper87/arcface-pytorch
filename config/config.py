@@ -1,6 +1,6 @@
 class Config(object):
     env = 'default'
-    backbone = 'resnet18'
+    backbone = 'resnet50'
     classify = 'softmax'
     num_classes = 5013
     metric = 'arc_margin'
@@ -41,7 +41,7 @@ class Config(object):
     train_batch_size = 16  # batch size
     test_batch_size = 60
 
-    input_shape = (1, 128, 128)
+    input_shape = (3, 128, 128)
 
     optimizer = 'sgd'
 
