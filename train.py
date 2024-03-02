@@ -28,7 +28,14 @@ if __name__ == '__main__':
     opt = Config()
     if opt.display:
         visualizer = Visualizer()
-    device = torch.device("cuda")
+
+    if torch.cuda.is_available():
+        device =  torch.device("cuda")
+    elif torch.backends.mps.is_available():
+        device = torch.device("mps")
+    else:
+        device = torch.device("cpu")
+
 
     train_dataset = Dataset(opt.train_root, opt.train_list, phase='train', input_shape=opt.input_shape)
     trainloader = data.DataLoader(train_dataset,
@@ -36,8 +43,8 @@ if __name__ == '__main__':
                                   shuffle=True,
                                   num_workers=opt.num_workers)
 
-    identity_list = get_lfw_list(opt.lfw_test_list)
-    img_paths = [os.path.join(opt.lfw_root, each) for each in identity_list]
+    # identity_list = get_lfw_list(opt.lfw_test_list)
+    # img_paths = [os.path.join(opt.lfw_root, each) for each in identity_list]
 
     print('{} train iters per epoch:'.format(len(trainloader)))
 
@@ -114,7 +121,7 @@ if __name__ == '__main__':
         if i % opt.save_interval == 0 or i == opt.max_epoch:
             save_model(model, opt.checkpoints_path, opt.backbone, i)
 
-        model.eval()
-        acc = lfw_test(model, img_paths, identity_list, opt.lfw_test_list, opt.test_batch_size)
+        # model.eval()
+        # acc = lfw_test(model, img_paths, identity_list, opt.lfw_test_list, opt.test_batch_size)
         if opt.display:
             visualizer.display_current_results(iters, acc, name='test_acc')

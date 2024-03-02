@@ -2,7 +2,7 @@ class Config(object):
     env = 'default'
     backbone = 'resnet18'
     classify = 'softmax'
-    num_classes = 13938
+    num_classes = 5013
     metric = 'arc_margin'
     easy_margin = False
     use_se = False
@@ -11,9 +11,22 @@ class Config(object):
     display = False
     finetune = False
 
-    train_root = '/data/Datasets/webface/CASIA-maxpy-clean-crop-144/'
-    train_list = '/data/Datasets/webface/train_data_13938.txt'
-    val_list = '/data/Datasets/webface/val_data_13938.txt'
+    machine = 'macos'
+
+    if machine == 'macos':
+        train_root = '/Users/bccca/dev/dat/personai_icartoonface_rectrain/icartoonface_rectrain'
+        train_list = '/Users/bccca/dev/dat/personai_icartoonface_rectrain/train.txt'
+        val_list = '/Users/bccca/dev/dat/personai_icartoonface_rectrain/val.txt'
+
+        checkpoints_path = '/Users/bccca/dev/dat/arcface-pytorch-checkpoints'
+
+    else:
+        train_root = '/root/face-rnd/dat/personai_icartoonface_rectrain/icartoonface_rectrain'
+        train_list = '/root/face-rnd/dat/personai_icartoonface_rectrain/train.txt'
+        val_list = '/root/face-rnd/dat/personai_icartoonface_rectrain/val.txt'
+
+        checkpoints_path = '/root/face-rnd/dat/arcface-pytorch-checkpoints'
+
 
     test_root = '/data1/Datasets/anti-spoofing/test/data_align_256'
     test_list = 'test.txt'
@@ -21,7 +34,6 @@ class Config(object):
     lfw_root = '/data/Datasets/lfw/lfw-align-128'
     lfw_test_list = '/data/Datasets/lfw/lfw_test_pair.txt'
 
-    checkpoints_path = 'checkpoints'
     load_model_path = 'models/resnet18.pth'
     test_model_path = 'checkpoints/resnet18_110.pth'
     save_interval = 10
