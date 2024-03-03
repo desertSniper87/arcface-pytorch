@@ -14,6 +14,8 @@ class Config(object):
     machine = 'server'
 
     if machine == 'macos':
+        data_root = '/Users/bccca/dev/dat'
+
         train_root = '/Users/bccca/dev/dat/personai_icartoonface_rectrain/icartoonface_rectrain'
         train_list = '/Users/bccca/dev/dat/personai_icartoonface_rectrain/train.txt'
         val_list = '/Users/bccca/dev/dat/personai_icartoonface_rectrain/val.txt'
@@ -21,6 +23,8 @@ class Config(object):
         checkpoints_path = '/Users/bccca/dev/dat/arcface-pytorch-checkpoints'
 
     else:
+        data_root = '/root/face-rnd/dat'
+
         train_root = '/root/face-rnd/dat/personai_icartoonface_rectrain/icartoonface_rectrain'
         train_list = '/root/face-rnd/dat/personai_icartoonface_rectrain/train.txt'
         val_list = '/root/face-rnd/dat/personai_icartoonface_rectrain/val.txt'
@@ -35,7 +39,7 @@ class Config(object):
     lfw_test_list = '/data/Datasets/lfw/lfw_test_pair.txt'
 
     load_model_path = 'models/resnet18.pth'
-    test_model_path = 'checkpoints/resnet18_110.pth'
+    test_model_path = '/Users/bccca/dev/dat/arcface-pytorch-checkpoints/resnet50_40.pth'
     save_interval = 10
 
     train_batch_size = 384  # batch size
