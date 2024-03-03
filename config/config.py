@@ -21,6 +21,7 @@ class Config(object):
         val_list = '/Users/bccca/dev/dat/personai_icartoonface_rectrain/val.txt'
 
         checkpoints_path = '/Users/bccca/dev/dat/arcface-pytorch-checkpoints'
+        test_model_path = f'/Users/bccca/dev/dat/arcface-pytorch-checkpoints/resnet50_20.pth'
 
     else:
         data_root = '/root/face-rnd/dat'
@@ -30,6 +31,8 @@ class Config(object):
         val_list = '/root/face-rnd/dat/personai_icartoonface_rectrain/val.txt'
 
         checkpoints_path = '/root/face-rnd/dat/arcface-pytorch-checkpoints'
+        test_model_path = f'{data_root}/arcface-pytorch-checkpoints/resnet50_0.pth'
+
 
 
     test_root = '/data1/Datasets/anti-spoofing/test/data_align_256'
@@ -39,10 +42,9 @@ class Config(object):
     lfw_test_list = '/data/Datasets/lfw/lfw_test_pair.txt'
 
     load_model_path = 'models/resnet18.pth'
-    test_model_path = '/Users/bccca/dev/dat/arcface-pytorch-checkpoints/resnet50_40.pth'
     save_interval = 10
 
-    train_batch_size = 384  # batch size
+    train_batch_size = 16  # batch size
     test_batch_size = 60
 
     input_shape = (3, 128, 128)
@@ -57,7 +59,7 @@ class Config(object):
     debug_file = '/tmp/debug'  # if os.path.exists(debug_file): enter ipdb
     result_file = 'result.csv'
 
-    max_epoch = 50
+    max_epoch = 51
     lr = 1e-1  # initial learning rate
     lr_step = 10
     lr_decay = 0.95  # when val_loss increase, lr = lr*lr_decay

@@ -16,9 +16,16 @@ transform_ = transforms.Compose([
     # *normalize,
 ])
 
+if torch.cuda.is_available():
+    DEVICE = "cuda"
+elif torch.backends.mps.is_available():
+    DEVICE = "mps"
+else:
+    DEVICE = "cpu"
+
 def get_predicted_class(img_path):
     img_path = f'{opt.data_root}/personai_icartoonface_rectest/icartoonface_rectest/{img_path}'
-    x = model(transform_(Image.open(img_path).convert('RGB')).to("mps").unsqueeze(0))
+    x = model(transform_(Image.open(img_path).convert('RGB')).to(DEVICE).unsqueeze(0))
     probabilities = nn.functional.softmax(x, dim=1)
     predicted_class = torch.argmax(probabilities, dim=1)
     return predicted_class.item()
